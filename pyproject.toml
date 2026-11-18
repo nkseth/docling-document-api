@@ -1,0 +1,39 @@
+[project]
+name = "docling-analysis-server"
+version = "0.1.0"
+description = "A Document Analysis API Server using Docling and FastAPI"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "pydantic>=2.5.0",
+    "python-multipart>=0.0.6",
+    "docling>=2.0.0",
+    "docling-core>=2.0.0",
+    "Pillow>=10.0.0",
+    "aiofiles>=23.0.0",
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "httpx>=0.25.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[tool.ruff]
+target-version = "py38"
+line-length = 88
+select = ["E", "W", "F", "I", "B", "C4", "ARG", "SIM"]
+ignore = ["E501", "W503", "E203"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]

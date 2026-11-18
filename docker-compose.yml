@@ -1,0 +1,26 @@
+services:
+  fastapi-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi-server
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      # Mount the code for development (optional - comment out for production)
+      - ./main.py:/app/main.py
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    networks:
+      - fastapi-network
+
+networks:
+  fastapi-network:
+    driver: bridge
